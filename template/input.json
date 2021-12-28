@@ -1,14 +1,12 @@
 {
-    "<RRPS/TFSA>":{
-        "first_transaction": "",
-        "limit": 0,
-        "contribution": [
-            {
-                "from": "",
-                "to": "",
-                "amount": 0
-            }
-        ],
-        "lump_sum": 0
-    }
+    "first_transaction": "",
+    "limit": 0,
+    "contribution": [
+        {
+            "from": "",
+            "to": "",
+            "amount": 0
+        }
+    ],
+    "lump_sum": 0
 }
