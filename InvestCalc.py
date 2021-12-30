@@ -1,12 +1,12 @@
 import argparse
 import sys
 import json
-from documentHolder import documentHolder
+from DocumentHolder import DocumentHolder
 
 def extractFromJson(jsonFile):
     with open(jsonFile) as inputFile:
             jsonData = json.load(inputFile)
-            inputData = documentHolder(**jsonData)
+            inputData = DocumentHolder(**jsonData)
 
     return inputData
 
@@ -31,3 +31,5 @@ if __name__ == "__main__":
             sys.exit(1)
         
         inputData = extractFromJson(args.update)
+    
+    inputType = 'RRSP' if args.rrsp else 'TFSA'
