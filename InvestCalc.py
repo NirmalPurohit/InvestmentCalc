@@ -1,14 +1,13 @@
 import argparse
 import sys
 import json
-from DocumentHolder import DocumentHolder
+from MongodbIO import HandleDBActions
 
 def extractFromJson(jsonFile):
     with open(jsonFile) as inputFile:
             jsonData = json.load(inputFile)
-            inputData = DocumentHolder(**jsonData)
 
-    return inputData
+    return jsonData
 
 
 if __name__ == "__main__":
@@ -33,3 +32,5 @@ if __name__ == "__main__":
         inputData = extractFromJson(args.update)
     
     inputType = 'RRSP' if args.rrsp else 'TFSA'
+    handleDbAction = HandleDBActions(inputType)
+    opResult = handleDbAction.updateRecord(inputData)

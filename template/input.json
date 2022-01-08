@@ -1,12 +1,12 @@
 {
     "first_transaction": "",
-    "limit": 0,
+    "limit": 0.0,
     "contribution": [
         {
-            "from": "",
-            "to": "",
-            "amount": 0
+            "start": "",
+            "end": "",
+            "amount": 0.0
         }
     ],
-    "lump_sum": 0
+    "lump_sum": 0.0
 }
