@@ -1,14 +1,8 @@
 import argparse
 import sys
 import json
+from InvestmentUtils import InvestmenUtils
 from MongodbIO import HandleDBActions
-
-def extractFromJson(jsonFile):
-    with open(jsonFile) as inputFile:
-            jsonData = json.load(inputFile)
-
-    return jsonData
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -24,13 +18,23 @@ if __name__ == "__main__":
         print("Error parsing the argument! \nYou need to choose an action to perform. Check help (-h/--help) for the options")
         sys.exit(1)
 
+    inputType = 'RRSP' if args.rrsp else 'TFSA'
+    handleDbAction = HandleDBActions(inputType)
+    investmentUtils = InvestmenUtils(inputType)
+
     if args.update:
         if not args.update.lower().endswith('.json'):
             print("Incorrect file type!\nonly JSON file is supported")
             sys.exit(1)
-        
-        inputData = extractFromJson(args.update)
-    
-    inputType = 'RRSP' if args.rrsp else 'TFSA'
-    handleDbAction = HandleDBActions(inputType)
-    opResult = handleDbAction.updateRecord(inputData)
+
+        inputData = investmentUtils.extractFromJson(args.update)
+        opResult = handleDbAction.updateRecord(inputData)
+    elif args.view:
+        totalInvested = investmentUtils.calculateInvestments()
+        print(f"Your total contribution for {inputType} is {totalInvested}")
+        currentBalance = float(input(f"Enter current balance for {inputType} >"))
+        diff = currentBalance - totalInvested
+        if (diff > 0):
+            print("Hurray! You are in profit by $%.2f" % diff)
+        else:
+            print("Ooops! You are in loss by $%.2f" % abs(diff))

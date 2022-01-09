@@ -1,5 +1,7 @@
 from pymongo import MongoClient, collection
 
+NumberTypes = (int, float, complex)
+
 class HandleDBActions:
     def __init__(self, inputType) -> None:
         self.mongoClient = MongoClient(port=27017)
@@ -12,7 +14,7 @@ class HandleDBActions:
             result = self.investmentCollection.insert_one(data)
         else:
             for key in data.keys():
-                if (isinstance(data[key], str) and not "".__eq__(data[key])) or (isinstance(data[key], float) and data[key] != 0.0):
+                if (isinstance(data[key], str) and not "".__eq__(data[key])) or (isinstance(data[key], NumberTypes) and data[key] != 0.0):
                     result = self.investmentCollection.update_one({"first_transaction": self.first_transaction["first_transaction"]}, \
                         {"$set": {key: data[key]}})
                 elif isinstance(data[key], list):
@@ -30,3 +32,7 @@ class HandleDBActions:
                             result = self.investmentCollection.update_one({"first_transaction": self.first_transaction["first_transaction"]}, \
                                 {"$push": {"contribution": doc}})
         return result
+
+    def getInvestment(self):
+        investmentDoc = self.investmentCollection.find_one()
+        return investmentDoc
