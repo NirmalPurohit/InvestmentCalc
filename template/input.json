@@ -1,17 +1,12 @@
 {
-    "first_transaction": "03/15/2021",
-    "limit": 12408.0,
+    "first_transaction": "",
+    "limit": 0,
     "contribution": [
         {
-            "start": "12/24/2020",
-            "end": "10/04/2021",
-            "amount": 233.86
-        },
-        {
-            "start": "10/18/2021",
-            "end": "01/07/2022",
-            "amount": 239.39
+            "start": "",
+            "end": "",
+            "amount": 0
         }
     ],
-    "lump_sum": 3700.0
+    "lump_sum": 0
 }
