@@ -1,6 +1,6 @@
 import argparse
 import sys
-import json
+
 from InvestmentUtils import InvestmenUtils
 from MongodbIO import HandleDBActions
 
@@ -27,8 +27,14 @@ if __name__ == "__main__":
             print("Incorrect file type!\nonly JSON file is supported")
             sys.exit(1)
 
-        inputData = investmentUtils.extractFromJson(args.update)
-        opResult = handleDbAction.updateRecord(inputData)
+        inputData = investmentUtils.extractFromJson(args.update, inputType)
+        currentRecord = handleDbAction.getRecords()
+        if currentRecord:
+            print(investmentUtils.printInvestment(currentRecord, inputType))
+            indx = int(input("Enter contribution index to modify (If there is no contribution, choosing index other than 0 wil update limits and lump sum too) \n"))
+        else:
+            indx = 0
+        opResult = handleDbAction.updateRecord(inputData, indx)
     elif args.view:
         totalInvested = investmentUtils.calculateInvestments()
         print(f"Your total contribution for {inputType} is {totalInvested}")

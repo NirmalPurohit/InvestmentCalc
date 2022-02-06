@@ -1,12 +1,25 @@
 {
-    "first_transaction": "",
-    "limit": 0,
-    "contribution": [
-        {
-            "start": "",
-            "end": "",
-            "amount": 0
-        }
-    ],
-    "lump_sum": 0
+    "RRSP": {
+        "limit": null,
+        "contributions" : [ 
+            { 
+                "start": null,
+                "end": null,
+                "hourly pay": null,
+                "rate": null
+            }
+        ],
+        "lump sum": null
+    },
+    "TFSA": {
+        "limit": null,
+        "contributions" : [ 
+            { 
+                "start": null,
+                "end": null,
+                "amount": null
+            }
+        ],
+        "lump sum": null
+    }
 }
